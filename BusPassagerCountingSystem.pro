@@ -24,4 +24,12 @@ HEADERS  += mainwindow.h \
 FORMS    += \
     mainwindow.ui
 
-LIBS += /lib/libopencv*.so
+unix {
+    LIBS += /lib/libopencv*.so
+}
+
+win32 {
+
+}
+
+
