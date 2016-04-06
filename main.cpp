@@ -24,7 +24,7 @@ int main()
 
 #ifdef Q_OS_WIN32
     CvCapture* capture = cvCreateFileCapture("D:/WorkSpace/BPCS/clip.mp4");
-#elif Q_OS_LINUX
+#elif defined(Q_OS_LINUX)
     CvCapture* capture = cvCreateFileCapture("../BusPassagerCountingSystem/clip.mp4");
 #endif
     if (!capture){
