@@ -22,7 +22,11 @@ int main()
     cvNamedWindow("Raw");
     cvNamedWindow("CodeBook");
 
+#ifdef Q_OS_WIN32
+    CvCapture* capture = cvCreateFileCapture("D:/WorkSpace/BPCS/clip.mp4");
+#elif Q_OS_LINUX
     CvCapture* capture = cvCreateFileCapture("../BusPassagerCountingSystem/clip.mp4");
+#endif
     if (!capture){
         cout<<"Open file failed"<<endl;
     }

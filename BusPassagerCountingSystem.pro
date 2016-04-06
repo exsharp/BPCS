@@ -29,7 +29,8 @@ unix {
 }
 
 win32 {
-
+    INCLUDEPATH+=c:/opencv/build/include/
+    LIBS+=c:/opencv/build/x86/vc12/lib/opencv_*.lib
 }
 
 
