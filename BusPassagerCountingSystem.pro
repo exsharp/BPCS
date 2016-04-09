@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     CodeBook.cpp \
-    util.cpp
+    util.cpp \
+    integralprojection.cpp
 
 HEADERS  += mainwindow.h \
     CodeBook.h \
-    util.h
+    util.h \
+    integralprojection.h
 
 FORMS    += \
     mainwindow.ui

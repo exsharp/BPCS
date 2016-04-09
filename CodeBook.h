@@ -49,12 +49,12 @@ private:
 
 public:
     CodeBook(CvSize size);
-    CodeBook();
     ~CodeBook();
-    int setImageSize(CvSize size);
+
     int learn(IplImage* rawImage); //学习，一次学习一帧
     int clear();
     int Diff(IplImage* rawImage,IplImage* &ImaskCodeBook);
+    CvSize getSize();
 };
 
 #endif // CODEBOOK_H

@@ -224,6 +224,10 @@ int cvclearStaleEntries(codeBook &c)
 
 //-----------------------------------------------------------------------------
 //
+//
+//
+//
+//
 //-----------------------------------------------------------------------------
 
 CodeBook::CodeBook(CvSize size){
@@ -248,28 +252,8 @@ CodeBook::CodeBook(CvSize size){
     }
 }
 
-CodeBook::CodeBook(){
-    for (int i = 0; i < imageLen; i++){
-        // 初始化每个码元数目为0
-        cB[i].numEntries = 0;
-    }
-
-    for (int i = 0; i<nChannels; i++)
-    {
-        cbBounds[i] = GATE_VALUE_CHANNELS;   // 用于确定码元各通道的阀值
-
-        minMod[i] = GATE_VALUE_MIN_MOD;   // 用于背景差分函数中
-        maxMod[i] = GATE_VALUE_MAX_MOD;   // 调整其值以达到最好的分割
-    }
-}
-
-int CodeBook::setImageSize(CvSize size){
-    this->size = size;
-
-    imageLen = size.height*size.width;
-    cB = new codeBook[imageLen];
-    // 得到与图像像素数目长度一样的一组码本,以便对每个像素进行处理
-    return 1;
+CvSize CodeBook::getSize(){
+    return this->size;
 }
 
 CodeBook::~CodeBook(){
@@ -311,13 +295,11 @@ int CodeBook::clear(){
 int CodeBook::Diff(IplImage* rawImage,IplImage* &ImaskCodeBook){
     IplImage* yuvImage;
     yuvImage = cvCreateImage(cvGetSize(rawImage), 8, 3);
+    // 给yuvImage 分配一个和rawImage 尺寸相同,8位3通道图像
 
     cvCvtColor(rawImage, yuvImage, CV_BGR2YCrCb);
     // 色彩空间转换,将rawImage 转换到YUV色彩空间,输出到yuvImage
 
-    // 给yuvImage 分配一个和rawImage 尺寸相同,8位3通道图像
-    ImaskCodeBook = cvCreateImage(size,IPL_DEPTH_8U,1);
-    // 为ImaskCodeBook 分配一个和rawImage 尺寸相同,8位单通道图像
     cvSet(ImaskCodeBook, cvScalar(255));
     // 设置单通道数组所有元素为255,即初始化为白色图像
 
