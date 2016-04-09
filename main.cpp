@@ -13,12 +13,12 @@
 #include <iostream>
 #include <QDebug>
 #include "util.h"
+#include "integralprojection.h"
 
 using namespace std;
 
 int main()
 {
-    // 初始化各变量
     cvNamedWindow("Raw");
     cvNamedWindow("CodeBook");
 
@@ -33,6 +33,8 @@ int main()
     IplImage* rawImage = cvQueryFrame(capture);
 
     CodeBook cb(cvGetSize(rawImage));
+    IntegralProjection ip(cvGetSize(rawImage));
+
     cb.learn(rawImage);
     for (int i = 0;i<30;i++){
         rawImage = cvQueryFrame(capture);
@@ -47,16 +49,22 @@ int main()
         }
 
         IplImage* ImaskCodeBook;
+        ImaskCodeBook = cvCreateImage(cb.getSize(),IPL_DEPTH_8U,1);
+        // 为ImaskCodeBook 分配一个和rawImage 尺寸相同,8位单通道图像
         cb.Diff(rawImage,ImaskCodeBook);
 
-        cvShowImage("Raw", rawImage);
-        cvShowImage("CodeBook", ImaskCodeBook);
+        ip.TEST(ImaskCodeBook);
+
+        cvShowImage("Raw",rawImage);
+        cvShowImage("CodeBook",ImaskCodeBook);
+
+        cvReleaseImage(&ImaskCodeBook);
 
         if (cvWaitKey(30) == 27)
             break;
-//        if (i >= 100){
-//            cvWaitKey();
-//        }
+        //if (i >= 100){
+        //    cvWaitKey();
+        //}
     }
 
 
