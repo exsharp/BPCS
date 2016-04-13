@@ -16,7 +16,7 @@ std::list<CvRect> Partition::GetBoundingRect(IplImage *src){
 
     CvSeq* contours = NULL;
     CvMemStorage* storage = cvCreateMemStorage(0);
-    // 上面源图片有瑕疵可以用腐蚀，膨胀来祛除
+
     int count = cvFindContours(src, storage, &contours,sizeof(CvContour),CV_RETR_EXTERNAL);
 
     for (CvSeq* c = contours; c != NULL; c = c->h_next) {
