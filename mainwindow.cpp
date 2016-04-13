@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
     capture = cvCreateFileCapture("../BusPassagerCountingSystem/clip.mp4");
     if (!capture){
         qDebug()<<"Can't createFileCapture"<<endl;
-
     }
     theTimer.start(33);
     imageLabel = new QLabel(this);

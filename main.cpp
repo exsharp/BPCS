@@ -9,11 +9,11 @@
 
 //    return a.exec();
 //}
-#include "CodeBook.h"
 #include <iostream>
 #include <QDebug>
 #include "util.h"
-#include "integralprojection.h"
+#include "partition.h"
+#include "CodeBook.h"
 
 using namespace std;
 
@@ -33,7 +33,6 @@ int main()
     IplImage* rawImage = cvQueryFrame(capture);
 
     CodeBook cb(cvGetSize(rawImage));
-    IntegralProjection ip(cvGetSize(rawImage));
 
     cb.learn(rawImage);
     for (int i = 0;i<30;i++){
@@ -53,7 +52,17 @@ int main()
         // 为ImaskCodeBook 分配一个和rawImage 尺寸相同,8位单通道图像
         cb.Diff(rawImage,ImaskCodeBook);
 
-        ip.TEST(ImaskCodeBook);
+        IplImage* clone;
+        clone = cvCreateImage(cb.getSize(),IPL_DEPTH_8U,1);
+        cvCopy(ImaskCodeBook,clone);
+
+        Partition partition(200,200);
+        std::list<CvRect> ret = partition.GetBoundingRect(clone);
+        for (int i = 0;i<ret.size();i++){
+            CvRect rc = ret.front();
+            ret.pop_front();
+            cvDrawRect(ImaskCodeBook, cvPoint(rc.x, rc.y), cvPoint(rc.x + rc.width, rc.y + rc.height), CV_RGB(255, 255, 255));
+        }
 
         cvShowImage("Raw",rawImage);
         cvShowImage("CodeBook",ImaskCodeBook);
@@ -62,9 +71,9 @@ int main()
 
         if (cvWaitKey(30) == 27)
             break;
-        //if (i >= 100){
-        //    cvWaitKey();
-        //}
+        if (i >= 100){
+            cvWaitKey();
+        }
     }
 
 

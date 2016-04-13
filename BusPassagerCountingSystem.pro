@@ -16,7 +16,7 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     CodeBook.cpp \
     util.cpp \
-    integralprojection.cpp
+    partition.cpp
 
 HEADERS  += mainwindow.h \
     CodeBook.h \
