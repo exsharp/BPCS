@@ -14,6 +14,7 @@
 #include "util.h"
 #include "partition.h"
 #include "CodeBook.h"
+#include "targettrace.h"
 
 using namespace std;
 
@@ -23,7 +24,7 @@ int main()
     cvNamedWindow("CodeBook");
 
 #ifdef Q_OS_WIN32
-    CvCapture* capture = cvCreateFileCapture("D:/WorkSpace/BPCS/clip.mp4");
+    CvCapture* capture = cvCreateFileCapture("D:/WorkSpace/BPCS/clip2.mp4");
 #elif defined(Q_OS_LINUX)
     CvCapture* capture = cvCreateFileCapture("../BusPassagerCountingSystem/clip.mp4");
 #endif
@@ -58,9 +59,11 @@ int main()
 
         Partition partition(200,200);
         std::list<CvRect> ret = partition.GetBoundingRect(clone);
-        for (int i = 0;i<ret.size();i++){
+        for (;!ret.empty();){
             CvRect rc = ret.front();
             ret.pop_front();
+            TargetStatus ts1(rc);
+            cout<<ts1.getCenterX()<<" "<<ts1.getCenterY()<<endl;
             cvDrawRect(ImaskCodeBook, cvPoint(rc.x, rc.y), cvPoint(rc.x + rc.width, rc.y + rc.height), CV_RGB(255, 255, 255));
         }
 
@@ -71,9 +74,9 @@ int main()
 
         if (cvWaitKey(30) == 27)
             break;
-        if (i >= 100){
-            cvWaitKey();
-        }
+//        if (i >= 100){
+//            cvWaitKey();
+//        }
     }
 
 

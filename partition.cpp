@@ -17,7 +17,8 @@ std::list<CvRect> Partition::GetBoundingRect(IplImage *src){
     CvSeq* contours = NULL;
     CvMemStorage* storage = cvCreateMemStorage(0);
 
-    int count = cvFindContours(src, storage, &contours,sizeof(CvContour),CV_RETR_EXTERNAL);
+    cvFindContours(src, storage, &contours,sizeof(CvContour),CV_RETR_EXTERNAL);
+    //返回找到的个数
 
     for (CvSeq* c = contours; c != NULL; c = c->h_next) {
         CvRect rc =cvBoundingRect(c,0);

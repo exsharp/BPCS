@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     CodeBook.cpp \
     util.cpp \
-    partition.cpp
+    partition.cpp \
+    targettrace.cpp
 
 HEADERS  += mainwindow.h \
     CodeBook.h \
     util.h \
-    integralprojection.h
+    partition.h \
+    targettrace.h
 
 FORMS    += \
     mainwindow.ui
