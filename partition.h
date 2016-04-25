@@ -9,7 +9,7 @@ class Partition
 {
 public:
     Partition(int wide,int high);
-    std::list<CvRect> GetBoundingRect(IplImage *src);
+    std::vector<CvRect> GetBoundingRect(IplImage *src);
 
 private:
     int wide;

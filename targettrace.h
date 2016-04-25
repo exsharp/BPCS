@@ -22,6 +22,7 @@ public:
     int getCenterY(){
         return center_y;
     }
+    int getDistance(int x,int y);
 
     static int radius;//两个对象之间的半径相隔这么多则认为是同一个对象
     friend bool operator & (TargetStatus const &ts1,TargetStatus const &ts2){
@@ -44,13 +45,19 @@ private:
 
     Status status_init;//最开始出现目标时候的状态
     Status status_now;//目标最新跟踪到的状态
+
+    int mark;
+
+    friend class TargetTrace;
 };
 
 class TargetTrace
 {
 public:
     TargetTrace(int threshold);
-    void refresh(std::list<CvRect> rects);
+
+    //返回值正数表示增加的人数，负数表示减少的人数，0不变
+    int refresh(std::vector<CvRect> rects);
 
 private:
     int boundary_top; //坐标的上边界
@@ -58,7 +65,10 @@ private:
 
     int threshold; //判断通过的坐标
 
-    std::list<TargetStatus> targets;
+    std::vector<TargetStatus> targets;
+
+private:
+    int count();
 };
 
 #endif // TARGETTRACE_H

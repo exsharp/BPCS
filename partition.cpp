@@ -8,8 +8,8 @@ Partition::Partition(int wide, int high)
     this->area = wide*high;
 }
 
-std::list<CvRect> Partition::GetBoundingRect(IplImage *src){
-    std::list<CvRect> ret;
+std::vector<CvRect> Partition::GetBoundingRect(IplImage *src){
+    std::vector<CvRect> ret;
 
     cvErode(src,src);
     //先做一下形态学腐蚀，花费时间未知

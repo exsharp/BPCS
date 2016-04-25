@@ -43,6 +43,9 @@ int main()
     }
     cb.clear();
 
+    TargetTrace trace(150);
+    int total=0;
+
     for (int i = 30;;i++){
         if (!(rawImage = cvQueryFrame(capture))){
             break;
@@ -58,12 +61,17 @@ int main()
         cvCopy(ImaskCodeBook,clone);
 
         Partition partition(200,200);
-        std::list<CvRect> ret = partition.GetBoundingRect(clone);
-        for (;!ret.empty();){
-            CvRect rc = ret.front();
-            ret.pop_front();
+        std::vector<CvRect> ret = partition.GetBoundingRect(clone);
+        int ret1 = trace.refresh(ret);
+        total += ret1;
+        if (ret1!=0){
+            cout<<total<<" "<<ret1<<endl<<endl;
+        }
+
+        for (int i = 0;i<ret.size();i++){
+            CvRect rc = ret[i];
             TargetStatus ts1(rc);
-            cout<<ts1.getCenterX()<<" "<<ts1.getCenterY()<<endl;
+            //cout<<ts1.getCenterX()<<" "<<ts1.getCenterY()<<endl;
             cvDrawRect(ImaskCodeBook, cvPoint(rc.x, rc.y), cvPoint(rc.x + rc.width, rc.y + rc.height), CV_RGB(255, 255, 255));
         }
 
