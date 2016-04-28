@@ -1,14 +1,20 @@
 #ifndef PARTITION_H
 #define PARTITION_H
+//分割
 
 #include <opencv2/opencv.hpp>
 
 #include <list>
 
+struct PParams{
+    int wide;
+    int high;
+};
+
 class Partition
 {
 public:
-    Partition(int wide,int high);
+    Partition(PParams pparams);
     std::vector<CvRect> GetBoundingRect(IplImage *src);
 
 private:

@@ -1,9 +1,9 @@
 #include "partition.h"
 
-Partition::Partition(int wide, int high)
+Partition::Partition(PParams pparams)
 {
-    this->wide = wide;
-    this->high = high;
+    this->wide = pparams.wide;
+    this->high = pparams.high;
 
     this->area = wide*high;
 }

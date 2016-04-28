@@ -1,10 +1,10 @@
 #ifndef TARGETTRACE_H
 #define TARGETTRACE_H
+//跟踪
 
 #include <opencv2/opencv.hpp>
 #include <math.h>
 #include <list>
-
 
 class TargetStatus{
     //一个跟踪的目标对应一个这个类的实例化
@@ -57,7 +57,7 @@ public:
     TargetTrace(int threshold);
 
     //返回值正数表示增加的人数，负数表示减少的人数，0不变
-    int refresh(std::vector<CvRect> rects);
+    int refresh(std::vector<CvRect> &rects);
 
 private:
     int boundary_top; //坐标的上边界

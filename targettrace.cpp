@@ -1,3 +1,4 @@
+
 #include "targettrace.h"
 
 int TargetStatus::radius = 100;
@@ -55,14 +56,13 @@ int TargetTrace::count(){
     return count;
 }
 
-int TargetTrace::refresh(std::vector<CvRect> rects){
+int TargetTrace::refresh(std::vector<CvRect> &rects){
 
     int rs = rects.size();
     int ts = targets.size();
 
     if (rs==ts){
         //已经存在的数量与识别出来的数量相等，可以直接一一对应
-        //std::cout<<"Equal"<<std::endl;
         for (int i = 0;i<rs;i++){
             targets.at(i).center_x = rects.at(i).x;
             targets.at(i).center_y = rects.at(i).y;
@@ -74,7 +74,7 @@ int TargetTrace::refresh(std::vector<CvRect> rects){
         for (int r_c = 0;r_c+ts<rs;r_c++){
             int min_total_dis = INT_MAX;
             int min_total_tmp = 0;
-            for (int t_c = 1;t_c<=ts;t_c++){
+            for (int t_c = 0;t_c<ts;t_c++){
                 TargetStatus target = targets.at(t_c);
                 int rect_x = rects.at(r_c+t_c).x;
                 int rect_y = rects.at(r_c+t_c).y;

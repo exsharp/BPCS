@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     CodeBook.cpp \
     util.cpp \
     partition.cpp \
-    targettrace.cpp
+    targettrace.cpp \
+    controler.cpp
 
 HEADERS  += mainwindow.h \
     CodeBook.h \
     util.h \
     partition.h \
-    targettrace.h
+    targettrace.h \
+    controler.h
 
 FORMS    += \
     mainwindow.ui
