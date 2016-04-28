@@ -1,4 +1,4 @@
-#include "controler.h"
+﻿#include "controler.h"
 
 Controler::Controler(string fileCapturePath)
 {
@@ -34,16 +34,14 @@ Controler::~Controler()
     cvReleaseCapture(&capture);
 }
 
-void Controler::QueryRawFrame(IplImage **_rawFrame)
+#include <stdio.h>
+
+void Controler::QueryRawFrame()
 {
     //TODO 错误处理
     if (!(rawImage = cvQueryFrame(this->capture))){
         assert(false);
     }
-    //cout<<rawImage->width<< " " <<rawImage->height<<endl;
-    *_rawFrame = cvCreateImage(captureSize,rawImage->depth,rawImage->nChannels);
-    cvCopy(rawImage,*_rawFrame);
-    //_rawFrame = rawImage;
 }
 
 int Controler::GetPassagerNumber()
@@ -90,6 +88,11 @@ void Controler::QueryMaskImg(IplImage *&ImaskCodeBook)
         cvDrawRect(ImaskCodeBook, cvPoint(rc.x, rc.y), cvPoint(rc.x + rc.width, rc.y + rc.height), CV_RGB(255, 255, 255));
     }
     cvReleaseImage(&clone);
+}
+
+IplImage *const Controler::GetRawFrameAddr() const
+{
+    return rawImage;
 }
 
 void Controler::Learn()

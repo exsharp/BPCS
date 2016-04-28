@@ -20,8 +20,9 @@ public:
     Controler(string fileCapturePath);
     ~Controler();
     void Learn();
-    void QueryRawFrame(IplImage **_rawFrame);
+    void QueryRawFrame();
     void QueryMaskImg(IplImage *&ImaskCodeBook);
+    IplImage* const GetRawFrameAddr() const;
     int GetPassagerNumber();
     int Trace();
 
