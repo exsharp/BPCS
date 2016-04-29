@@ -1,21 +1,11 @@
-#include "util.h"
+﻿#include "util.h"
 
 QImage *IplImageToQImage(const IplImage *img)
 {
-    //std::cout<<img->width<<" "<<img->height<<std::endl;
-    IplImage *dst;
-    if (img){
-        dst = cvCreateImage(cvGetSize(img),img->depth,img->nChannels);
-        cvCvtColor(img,dst,CV_BGR2RGB);
-    }else{
-        CvSize size;
-        size.height=10;
-        size.width=10;
-        dst = cvCreateImage(size,8,3);
-    }
-    uchar *imgData=(uchar *)dst->imageData;
-    QImage *image=new QImage(imgData,dst->width,dst->height,QImage::Format_RGB888);
-    //cvReleaseImage(&dst);
+    QImage *image;
+    cvCvtColor(img,img,CV_BGR2RGB);
+    uchar *imgData=(uchar *)img->imageData;
+    image=new QImage(imgData,img->width,img->height,QImage::Format_RGB888);
     return image;
 }
 
