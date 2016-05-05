@@ -234,6 +234,8 @@ CodeBook::CodeBook(CvSize size){
 
     this->size = size;
 
+    this->nChannels = CHANNELS;
+
     imageLen = size.height*size.width;
     cB = new codeBook[imageLen];
     // 得到与图像像素数目长度一样的一组码本,以便对每个像素进行处理

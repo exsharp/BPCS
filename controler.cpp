@@ -1,13 +1,16 @@
 ﻿#include "controler.h"
 
+#include <QFile>
+
 Controler::Controler(string fileCapturePath)
 {
 
-#ifdef Q_OS_WIN32
-    capture = cvCreateFileCapture("D:/WorkSpace/BPCS/clip2.mp4");
-#elif defined(Q_OS_LINUX)
-    capture = cvCreateFileCapture("../BusPassagerCountingSystem/clip2.mp4");
-#endif
+    capture = cvCreateFileCapture("/home/clip2.mp4");
+    //capture = cvCaptureFromCAM(-1);
+//    QFile qfile(fileCapturePath.c_str());
+//    if (qfile.exists()){
+//        std::cout<<"exists"<<std::endl;
+//    }
 
     if (!capture){
         std::cout<<"Open file failed"<<std::endl;

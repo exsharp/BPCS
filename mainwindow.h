@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QLabel>
-#include "CodeBook.h"
+
+#include "controler.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,13 +24,13 @@ public slots:
 
 private:
     QTimer theTimer;
-    CvCapture *capture;
     QLabel *imageLabel;
     IplImage *iplImage;
 
-    QImage *qImage;
-
     Ui::MainWindow *ui;
+
+    Controler *ctrler;
+
 
 protected:
     void paintEvent(QPaintEvent *e);

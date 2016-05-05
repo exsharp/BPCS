@@ -102,12 +102,15 @@ int TargetTrace::refresh(std::vector<CvRect> &rects){
     }else if (rs<ts){
         //与上面的相反
         std::cout<<"Clear Target"<<std::endl;
+        std::cout<<ts<<" "<<rs<<std::endl;
         int begin_target = 0;
         for (int t_c = 0;t_c+rs<ts;t_c++){
             //类似于动态规划，循环已存的列表
             int min_total_dis = INT_MAX;
             int min_total_tmp = 0;
+            std::cout<<"1"<<std::endl;
             for (int r_c = 0;r_c<rs;r_c++){
+                std::cout<<"2"<<std::endl;
                 TargetStatus target = targets.at(r_c);
                 int rect_x = rects.at(r_c+t_c).x;
                 int rect_y = rects.at(r_c+t_c).y;
@@ -119,6 +122,7 @@ int TargetTrace::refresh(std::vector<CvRect> &rects){
                 begin_target = t_c;
             }
         }
+        std::cout<<"Here"<<std::endl;
         int conserve_begin = begin_target;
         int conserve_end = begin_target + rs;
         std::vector<TargetStatus> tmp;

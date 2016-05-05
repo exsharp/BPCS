@@ -38,7 +38,7 @@ class CodeBook{
 private:
     //需要用到的变量
     codeBook* cB;
-    int nChannels = CHANNELS;
+    int nChannels;
     unsigned cbBounds[CHANNELS];
     int minMod[CHANNELS];
     int maxMod[CHANNELS];
